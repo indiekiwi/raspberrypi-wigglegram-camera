@@ -1,5 +1,3 @@
-# raspberry-pi-wrigglegram
-
 This project involves building and testing a Raspberry Pi setup with up to 4 USB webcams to simultaneously capture digital images, with the end goal of creating wigglegrams. The plan is to enclose the setup in a 3D-printed shell, investigate hardware limitations, and determine the minimum powered Raspberry Pi required to make it work. Once the setup is stable, the plan is to upgrade the webcams.
 
 ## Cameras Used
