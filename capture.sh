@@ -8,7 +8,7 @@ fragments=("A" "B" "C" "D")
 
 # Capture images in parallel
 for i in "${!devices[@]}"; do
-    ffmpeg -loglevel error -f video4linux2 -i "${devices[$i]}" -frames:v 1 -s 640x480 "images/${timestamp}_${fragments[$i]}.jpg" &
+    ffmpeg -loglevel error -f video4linux2 -i "${devices[$i]}" -frames:v 1 -s 435x309 "images/${timestamp}_${fragments[$i]}.jpg" &
     sleep 0.1
 done
 
