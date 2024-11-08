@@ -36,6 +36,12 @@ Elapsed time:              1193 ms
 Success!
 ```
 
+### Thoughts on the next iteration...
+- Fixed-focus cameras (50-70° field of view) to mimic the 3D effect of Nintendo 3DS cameras, avoiding autofocus and manual adjustments to the lens.
+- Experiment with camera spacing to enhance 3D depth perception.
+- Develop a web interface for previewing and triggering captures.
+- Explore portability requirements with battery power.
+
 ### wigglegrams created:
 ![](readme/1731046338_A.gif)
 ![](readme/1731046338_B.gif)
