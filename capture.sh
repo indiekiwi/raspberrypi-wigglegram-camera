@@ -10,7 +10,6 @@ start_time_pretty=$(date +"%T.%N")
 # Capture images in parallel
 for i in "${!devices[@]}"; do
     ffmpeg -loglevel error -f video4linux2 -i "${devices[$i]}" -frames:v 1 -s 1920x1080 "images/${timestamp}_${fragments[$i]}.jpg" &
-    sleep 0.1
 done
 wait
 

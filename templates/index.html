@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newest Image Sets</title>
+<style>
+html, body, div {
+    margin: 0;
+    padding: 0;
+    background: black;
+}
+img {
+    width: 33.3%;
+    float: left;
+}
+</style>
+</head>
+<body>
+    {% for prefix, images in image_sets %}
+    <div class="wrapper">
+        <img src="{{ url_for('static', filename=images['A'].split('/')[-1]) }}">
+    </div>
+    <div class="wrapper">
+        <img src="{{ url_for('static', filename=images['B'].split('/')[-1]) }}">
+    </div>
+    <div class="wrapper">
+        <img src="{{ url_for('static', filename=images['C'].split('/')[-1]) }}">
+    </div>
+    {% endfor %}
+</body>
+</html>
