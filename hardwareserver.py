@@ -8,13 +8,14 @@ from gpiozero import Button, LED
 devices = ["/dev/video0", "/dev/video2", "/dev/video4"]
 fragments = ["A", "B", "C"]
 image_dir = "images"
-resolutions = ["1920x1080", "960x540", "480x270"]
-res = resolutions[0]
+res = "1920x1080"
 
 button_shutter = Button(2)
 button_off = Button(3) # being connected to GPIO3 will also power on the pi when it's been shut down
-led_flash = LED(17)
-led_ready = LED(4)
+led_flash = LED(17) #white
+led_ready = LED(4) #blue
+led_error = LED(27) #red
+led_success = LED(22) #green
 
 os.makedirs(image_dir, exist_ok=True)
 
@@ -44,6 +45,7 @@ def shutdown():
 
 # main loop
 def listen_for_buttons():
+    i = 0
     while True:
         if button_off.is_pressed:
             shutdown()
@@ -83,12 +85,27 @@ def listen_for_buttons():
 
             # Error handling if fewer files are captured than expected
             if len(captured_files) != len(fragments):
+                for _ in range(5):
+                    led_error.on()
+                    time.sleep(0.1)
+                    led_error.off()
+                    time.sleep(0.1)
                 print(f"Error: Captured {len(captured_files)} instead of {len(fragments)}")
+            else:
+                for _ in range(5):
+                    led_success.on()
+                    time.sleep(0.1)
+                    led_success.off()
+                    time.sleep(0.1)
+
+                led_success.on
             print("ready...")
 
+        i = (i + 1) % 5
+        if i == 0:
+            led_ready.toggle()
         time.sleep(0.1)
 
 if __name__ == "__main__":
     print("Started...")
-    led_ready.on()
     listen_for_buttons()
