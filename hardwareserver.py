@@ -40,6 +40,9 @@ def capture_image(device, fragment, timestamp):
 
 # button_off
 def shutdown():
+    for _ in range(10):
+        led_error.toggle()
+        time.sleep(0.1)
     print("Shutting down the Raspberry Pi...")
     subprocess.run(["sudo", "shutdown", "-h", "now"])
 
