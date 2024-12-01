@@ -1,12 +1,29 @@
-This project involves building a portable multi-lens camera using a Raspberry Pi 4 (4GB) and multiple USB cameras, all housed in a custom 3D-printed case. The setup includes a compact USB power bank for enhanced portability. The camera captures 3D/stereoscopic image series, which can be combined to create a "wigglegram" — an animated GIF that flips between frames to produce a dynamic 3D illusion.
+This project involves building a portable multi-lens camera using a Raspberry Pi and multiple USB cameras, all housed in a custom 3D-printed case. The setup includes a compact USB power bank for enhanced portability. The camera captures 3D/stereoscopic image series, which can be combined to create a "wigglegram" — an animated GIF that flips between frames to produce a dynamic 3D illusion.
 
 ## Revision B: Portable Build
+
+### Hardware
 - Upgraded to 3x fixed focus 2MP USB webcams (https://s.click.aliexpress.com/e/_m01QQuJ - variation: **90 degree fixed focus**)
 - Add support for USB power bank (momax 1-Power Mini 5000mah)
-- Added a python flask web server to view image sets and download sets in bulk
 - Designed & iterated through 3D printed housing with various case features
-- LEDs: flash (white), status (blue), success (green), failure (red)
-- Buttons: Power on/off, shutter button
+  - 4x LEDs, 2x Push switches
+- Raspberry pi 4 4GB
+
+### Features
+- Python flask web server to view image sets and download sets in bulk
+- LEDs:
+  - flash (white)
+  - status (blue)
+  - success (green)
+  - failure (red)
+- Buttons:
+  - 1. Shutter button
+  - 2. Secondary button:
+    - Push to toggle flash
+    - Hold to turn pi on
+    - Turn Pi on, when it's off
+- Inactivity shutdown
+- Turn flash on/off
 
 <table>
   <tr><th colspan="4">Rev B build</th></tr>
