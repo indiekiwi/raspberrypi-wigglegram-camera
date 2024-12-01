@@ -20,10 +20,10 @@ This project involves building a portable multi-lens camera using a Raspberry Pi
   - 1. Shutter button
   - 2. Secondary button:
     - Push to toggle flash
-    - Hold to turn pi on
+    - Hold to turn pi off
     - Turn Pi on, when it's off
 - Inactivity shutdown
-- Turn flash on/off
+- Turn flash on/off (White LED at front of camera, no resistor)
 
 <table>
   <tr><th colspan="4">Rev B build</th></tr>
