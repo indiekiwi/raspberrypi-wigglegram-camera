@@ -1,6 +1,6 @@
 # Project Description
 This project is creating a portable multi-lens camera using a Raspberry Pi 4 4GB with multiple USB cameras, housed in a custom 3D printed case supporting a small USB C Powerbank for portability.
-Capturing a 3D/stereoscopic series of images which can then be merged to create a "wigglegram"; a gif that creates a 3D illusition which flips between the captured image frames indefinetly.
+Capturing a 3D/stereoscopic series of images which can then be merged to create a "wigglegram"; a gif that creates a 3D illusition which flips between the captured image frames indefinitely.
 
 # Revision A
 Originally tested a MVP with 3-4, 0.3MP USB cameras.
