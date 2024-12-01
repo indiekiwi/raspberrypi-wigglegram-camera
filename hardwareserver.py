@@ -60,9 +60,11 @@ def listen_for_buttons():
             start_time = time.time()
 
             # Use multiprocessing Pool to run image capture in parallel
+            led_ready.on()
             led_flash.on()
             with Pool(len(devices)) as pool:
                 pool.starmap(capture_image, zip(devices, fragments, [timestamp] * len(devices)))
+            led_ready.off()
             led_flash.off()
 
             # Logging captured files and timestamps
