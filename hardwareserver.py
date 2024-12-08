@@ -5,14 +5,16 @@ import json
 from multiprocessing import Pool
 from gpiozero import Button, LED
 
-# Configuration
+# Preferences Config
+num_capture_frames = 3
+shutdown_hold_seconds = 3
+shutdown_inactivity_seconds = 900 # 15 mins
+res = "1920x1080"
+# System Config
 devices = ["/dev/video0", "/dev/video2", "/dev/video4"]
 fragments = ["A", "B", "C"]
 image_dir = "images"
-res = "1920x1080"
 state_file = "state.json"
-inactivity_shutdown_seconds = 300 # 5 mins
-shutdown_hold_seconds = 3
 
 button_shutter = Button(2)
 button_secondary = Button(3)
@@ -44,14 +46,16 @@ state = load_state()
 
 # Capture Image
 def capture_image(device, fragment, timestamp):
-    output_file = f"{image_dir}/{timestamp}_{fragment}.jpg"
+    output_file = f"{image_dir}/{timestamp}_{fragment}-%d.jpg"
     command = [
         "ffmpeg",
         "-loglevel", "error",
         "-f", "video4linux2",
         "-i", device,
-        "-frames:v", "1",
+        "-frames:v", str(num_capture_frames),
         "-s", res,
+        "-vf", "lutrgb=r='val*1.1':g='val*0.95':b='val*0.9'",
+#        "-vf", "eq=brightness=0.05:contrast=1.2:saturation=1.1",
         output_file
     ]
     try:
@@ -86,8 +90,8 @@ def listen_for_buttons():
 
     while True:
         inactivity = inactivity + loop_delay
-        if inactivity > inactivity_shutdown_seconds:
-            print(f"Trigged shutdown due to inactivity ({inactivity_shutdown_seconds} seconds)...")
+        if inactivity > shutdown_inactivity_seconds:
+            print(f"Trigged shutdown due to inactivity ({shutdown_inactivity_seconds} seconds)...")
             shutdown()
 
         if button_secondary.is_pressed:
@@ -134,11 +138,13 @@ def listen_for_buttons():
                 print(f"{fragment} {diff_text}")
 
             # Error handling if fewer files are captured than expected
-            if len(captured_files) != len(fragments):
+            expected_images = len(fragments) * num_capture_frames
+            if len(captured_files) != expected_images:
                 led_error.blink(on_time=0.1, off_time=0.1, n=5, background=False)
-                print(f"Error: Captured {len(captured_files)} instead of {len(fragments)}")
+                print(f"Error: Captured {len(captured_files)} instead of {num_capture_frames}")
             else:
                 led_success.blink(on_time=0.1, off_time=0.1, n=5, background=False)
+                print(f"Captured {expected_images}!")
             sync_leds()
             inactivity = 0
             print("ready...")
