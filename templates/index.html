@@ -5,31 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newest Image Sets</title>
     <style>
-        html, body, div {
+        html, body {
             margin: 0;
             padding: 0;
             background: #222;
             color: white;
+            font-family: Arial, sans-serif;
         }
-        img {
-            width: 33.3%;
-            float: left;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-        .wrapper {
-            margin: 10px;
-        }
+	img {
+            width: 100%;
+	}
         select {
             padding: 5px;
             font-size: 16px;
         }
+        th, td {
+            border: 2px solid green;
+            padding: 10px;
+            text-align: center;
+            vertical-align: top;
+        }
+	.otherCols {
+            width: 33%;
+        }
+        tr:nth-child(even) {
+            background-color: #000;
+        }
         .controls {
             text-align: center;
-            margin-top: 10px;
+            margin: 10px;
         }
-        .set-display {
+        .set-details {
             display: inline-block;
             margin-right: 10px;
             font-size: 18px;
+            margin: 10px;
         }
         .download-btn {
             display: inline-block;
@@ -42,8 +57,8 @@
 </head>
 <body>
     <div class="controls">
-        <div class="set-display">
-            Sets: 
+        <div class="set-details">
+            Sets:
             <form method="get" action="/" style="display:inline-block;">
                 <select id="sets" name="sets">
                     {% for i in range(1, max_sets + 1) %}
@@ -60,16 +75,31 @@
         </div>
     </div>
 
-    {% for prefix, images in image_sets %}
-    <div class="wrapper">
-        <img src="{{ url_for('static', filename=images['A'].split('/')[-1]) }}">
-    </div>
-    <div class="wrapper">
-        <img src="{{ url_for('static', filename=images['B'].split('/')[-1]) }}">
-    </div>
-    <div class="wrapper">
-        <img src="{{ url_for('static', filename=images['C'].split('/')[-1]) }}">
-    </div>
-    {% endfor %}
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <th>Details</th>
+            <th class="otherCols">Subset A</th>
+            <th class="otherCols">Subset B</th>
+            <th class="otherCols">Subset C</th>
+        </tr>
+
+        {% for prefix, subsets in image_sets %}
+        <tr>
+            <td>
+                {{ prefix }}<br><br>
+                A x {{ subsets['A']|length }}<br>
+                B x {{ subsets['B']|length }}<br>
+                C x {{ subsets['C']|length }}
+            </td>
+            {% for subset in ['A', 'B', 'C'] %}
+            <td>
+                {% for _, filename in subsets[subset] %}
+                <img src="{{ url_for('static', filename=filename) }}" style="width: 100%; margin-bottom: 5px;">
+                {% endfor %}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>

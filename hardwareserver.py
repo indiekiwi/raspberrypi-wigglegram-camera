@@ -6,7 +6,7 @@ from multiprocessing import Pool
 from gpiozero import Button, LED
 
 # Preferences Config
-num_capture_frames = 3
+num_capture_frames = 5
 shutdown_hold_seconds = 3
 shutdown_inactivity_seconds = 900 # 15 mins
 res = "1920x1080"
@@ -55,7 +55,6 @@ def capture_image(device, fragment, timestamp):
         "-frames:v", str(num_capture_frames),
         "-s", res,
         "-vf", "lutrgb=r='val*1.1':g='val*0.95':b='val*0.9'",
-#        "-vf", "eq=brightness=0.05:contrast=1.2:saturation=1.1",
         output_file
     ]
     try:

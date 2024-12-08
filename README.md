@@ -28,10 +28,10 @@ This project involves building a portable multi-lens camera using a Raspberry Pi
 <table>
   <tr><th colspan="4">Rev B build</th></tr>
   <tr>
-    <td><img src="readme/rev2_a.jpg"></td>
-    <td><img src="readme/rev2_b.jpg"></td>
-    <td><img src="readme/rev2_c.jpg"></td>
-    <td><img src="readme/rev2_d.jpg"></td>
+    <td><img src="resources/readme_images/rev2_a.jpg"></td>
+    <td><img src="resources/readme_images/rev2_b.jpg"></td>
+    <td><img src="resources/readme_images/rev2_c.jpg"></td>
+    <td><img src="resources/readme_images/rev2_d.jpg"></td>
   </tr>
 </table>
 
@@ -53,16 +53,16 @@ Tested a minimum viable product using 3-4 USB cameras, each with a resolution of
 <table>
   <tr><th colspan="3">Rev A build</th></tr>
   <tr>
-    <td><img src="readme/webcams_1.jpg"></td>
-    <td><img src="readme/webcams_2_back.jpg"></td>
-    <td><img src="readme/webcams_3_front.jpg"></td>
+    <td><img src="resources/readme_images/webcams_1.jpg"></td>
+    <td><img src="resources/readme_images/webcams_2_back.jpg"></td>
+    <td><img src="resources/readme_images/webcams_3_front.jpg"></td>
   </tr>
 </table>
 
 <table>
   <tr><th colspan="2">Rev A Samples</th></tr>
   <tr>
-    <td><img src="readme/1731046338_B.gif"></td>
-    <td><img src="readme/1731052035_A.gif"></td>
+    <td><img src="resources/readme_images/1731046338_B.gif"></td>
+    <td><img src="resources/readme_images/1731052035_A.gif"></td>
   </tr>
 </table>
