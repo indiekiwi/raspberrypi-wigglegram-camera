@@ -1,0 +1,13 @@
+[Unit]
+Description=Web Server for https://github.com/indiekiwi/raspberrypi-wigglegram-camera
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 YOUR_BASE_DIRECTORY/2_web-server.py
+WorkingDirectory=YOUR_BASE_DIRECTORY
+Restart=always
+User=YOUR_USER
+Group=YOUR_GROUP
+
+[Install]
+WantedBy=multi-user.target
