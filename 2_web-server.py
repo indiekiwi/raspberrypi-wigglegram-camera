@@ -12,30 +12,14 @@ def get_newest_image_sets(num_sets):
     image_sets = {}
     for image in image_files:
         base_name = os.path.basename(image)
-        try:
-            prefix, remainder = base_name.split('_')
-            subset, index_with_ext = remainder.split('-')
-            index = index_with_ext.split('.')[0]  # Strip the file extension
-            index = int(index)  # Convert to integer
-        except ValueError:
-            print(f"Skipping invalid filename: {base_name}")
-            continue  # Skip files with incorrect format
-
+        prefix = base_name.split('_')[0]
         if prefix not in image_sets:
-            image_sets[prefix] = {'A': [], 'B': [], 'C': []}
-        if subset not in image_sets[prefix]:
-            print(f"Skipping unexpected subset: {subset}")
-            continue  # Skip unexpected subsets
+            image_sets[prefix] = {}
+        suffix = base_name.split('_')[1][0]
+        image_sets[prefix][suffix] = image
 
-        image_sets[prefix][subset].append((index, base_name))
-
-    # Sort each subset by index
-    for prefix, subsets in image_sets.items():
-        for subset, items in subsets.items():
-            items.sort(key=lambda x: x[0])  # Sort by index
-
-    # Sort sets by timestamp (prefix) in reverse order
-    sorted_sets = sorted(image_sets.items(), key=lambda x: x[0], reverse=True)
+    complete_sets = [(prefix, images) for prefix, images in image_sets.items() if len(images) == 3]
+    sorted_sets = sorted(complete_sets, key=lambda x: x[0], reverse=True)
     return sorted_sets[:num_sets], len(sorted_sets)
 
 @app.route('/')
@@ -51,12 +35,11 @@ def download_all():
     zip_io = io.BytesIO()
     with zipfile.ZipFile(zip_io, 'w', zipfile.ZIP_DEFLATED) as zip_file:
         for prefix, images in newest_image_sets:
-            for subset in ['A', 'B', 'C']:
-                for _, image in images[subset]:
-                    image_path = os.path.join(IMAGE_DIR, image)
-                    zip_file.write(image_path, os.path.basename(image_path))
+            for suffix in ['A', 'B', 'C']:
+                image_path = images[suffix]
+                zip_file.write(image_path, os.path.basename(image_path))
     zip_io.seek(0)
     return send_file(zip_io, as_attachment=True, download_name="image_sets.zip", mimetype='application/zip')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0')

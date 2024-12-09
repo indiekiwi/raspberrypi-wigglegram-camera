@@ -1,2 +1,3 @@
 images/*.jpg
 state.json
+resources/config.env
