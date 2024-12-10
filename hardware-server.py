@@ -5,11 +5,11 @@ import serial
 from multiprocessing import Pool
 from gpiozero import Button
 
-from py_hardware_server.led_controller import LEDController
-from py_hardware_server.camera import Camera
-from py_hardware_server.flash import Flash
-from py_hardware_server.bluetooth import Bluetooth
-from py_hardware_server.preview import Preview
+from hw_classes.led_controller import LEDController
+from hw_classes.camera import Camera
+from hw_classes.flash import Flash
+from hw_classes.bluetooth import Bluetooth
+from hw_classes.preview import Preview
 
 # Preferences Config
 shutdown_hold_seconds = 3
@@ -119,6 +119,7 @@ def listen_for_buttons():
                 bluetooth.send_via_bluetooth(f"images/preview_{timestamp}.jpg")
             led_controller.sync_leds()
             inactivity = 0
+            ser.write(b'0')
             print("")
             print("ready...")
 

@@ -3,7 +3,7 @@ import subprocess
 
 class Bluetooth:
     def __init__(self):
-        self.is_enable_bluetooth_transfer = 1
+        self.is_enable_bluetooth_transfer = 0
 
     def send_via_bluetooth(self, image_path):
         config_file = "resources/config.env"
