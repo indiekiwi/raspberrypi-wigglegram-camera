@@ -8,7 +8,7 @@ After taking Rev B out into the real world, some potential improvements have bee
 - "warming up" the cameras to adapt to exposure levels. This will be a seperate button to the shutter.
 - In Progress: A USB hub + extension will seperate two parts of the camera:
   - Raspberry pi 4 + Battery Pack + Power Button
-  - 3x USB cameras in a seperate enclosure which includes the USB hub, in addtion to a raspberry pi mico microcontroller using HID with buttons to activate the camera on the raspberry pi, and accepting serial connections to control LED signals from the raspberry pi
+  - 3x USB cameras in a seperate enclosure which includes the USB hub, in addtion to a raspberry pi microcontroller using HID with buttons to activate the camera on the raspberry pi, and accepting serial connections to control LED signals from the raspberry pi
 - Bluetooth connectivity to a phone to push preview images
 
 ## Revision B: Portable Build

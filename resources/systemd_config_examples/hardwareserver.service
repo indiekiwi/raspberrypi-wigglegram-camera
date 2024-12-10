@@ -3,7 +3,7 @@ Description=Hardware Server for https://github.com/indiekiwi/raspberrypi-wiggleg
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 YOUR_BASE_DIRECTORY/wigglegram/1_hardware-server.py
+ExecStart=/usr/bin/python3 YOUR_BASE_DIRECTORY/wigglegram/hardware-server.py
 WorkingDirectory=YOUR_BASE_DIRECTORY
 StandardOutput=journal
 StandardError=journal

@@ -1,3 +1,4 @@
 images/*.jpg
 resources/state.json
 resources/config.env
+py_hardware_server/__pycache__/
