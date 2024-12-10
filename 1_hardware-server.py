@@ -2,24 +2,26 @@ import os
 import subprocess
 import time
 import json
+import serial
 from multiprocessing import Pool
 from gpiozero import Button, LED
 from PIL import Image
 
 # Preferences Config
-num_warmup_frames = 3 # 5 seems optimal, @todo test usb 3.0 hub with 3x usb 3.0 ports could lower this as the usb 2.0 camera falls behind
+num_warmup_frames = 1
 shutdown_hold_seconds = 3
-shutdown_inactivity_seconds = 900 # 15 mins
+shutdown_inactivity_seconds = 9001 # 15 mins
 res = "1920x1080"
 res_warmup = "480x270"
 is_preview_landscape = 0
 preview_factor = 4
+is_enable_bluetooth_transfer = 0
 
 # System Config
 devices = ["/dev/video0", "/dev/video2", "/dev/video4"]
 fragments = ["A", "B", "C"]
 image_dir = "images"
-state_file = "state.json"
+state_file = "resources/state.json"
 
 button_shutter = Button(2)
 button_secondary = Button(3)
@@ -60,6 +62,7 @@ def warmup_camera(device):
         "-vf", "lutrgb=r='val*1.1':g='val*0.95':b='val*0.9'",
         "-f", "null", "-"
     ]
+
     try:
         subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
     except subprocess.TimeoutExpired:
@@ -112,6 +115,9 @@ def send_via_bluetooth(image_path):
     config_file = "resources/config.env"
 
     # error handling
+    if not is_enable_bluetooth_transfer:
+        print("[Bluetooth] Transfer is disabled")
+        return
     if not os.path.isfile(config_file):
         print(f"[Bluetooth] No resources/config.env")
         return
@@ -198,8 +204,13 @@ def listen_for_buttons():
             sync_leds()
             led_status.on()
 
-            with Pool(len(devices)) as pool:
-                pool.starmap(warmup_camera, zip(devices))
+
+            ser = serial.Serial('/dev/ttyACM0', 9600)
+            ser.write(b'1')
+
+# @todo: Move to a seperate button
+#            with Pool(len(devices)) as pool:
+#                pool.starmap(warmup_camera, zip(devices))
 
             led_success.on()
             if state["flash"]:

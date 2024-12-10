@@ -1,5 +1,7 @@
 #!/bin/bash
 
+IMAGE_TIMESTAMP_TO_SYNC = 1733700000
+
 BASE_DIR=$(dirname "$(realpath "$0")")/..
 
 CONFIG_FILE="$BASE_DIR/resources/config.env"
@@ -17,4 +19,4 @@ if [ ! -d "$IMAGE_DIR" ]; then
     exit 1
 fi
 
-obexftp --nopath --noconn --uuid none --bluetooth "$PHONE_ADDRESS" --channel 12 --put "$IMAGE_DIR/1733738792_merged.jpg"
+obexftp --nopath --noconn --uuid none --bluetooth "$PHONE_ADDRESS" --channel 12 --put "$IMAGE_DIR/$IMAGE_TIMESTAMP_TO_SYNC_merged.jpg"

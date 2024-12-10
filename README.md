@@ -1,5 +1,16 @@
 This project involves building a portable multi-lens camera using a Raspberry Pi and multiple USB cameras, all housed in a custom 3D-printed case. The setup includes a compact USB power bank for enhanced portability. The camera captures 3D/stereoscopic image series, which can be combined to create a "wigglegram" — an animated GIF that flips between frames to produce a dynamic 3D illusion.
 
+## Revision C:
+
+After taking Rev B out into the real world, some potential improvements have been identified for the next iteration.
+
+- Extend the distance between lens from 5mm to around 30mm
+- "warming up" the cameras to adapt to exposure levels. This will be a seperate button to the shutter.
+- In Progress: A USB hub + extension will seperate two parts of the camera:
+  - Raspberry pi 4 + Battery Pack + Power Button
+  - 3x USB cameras in a seperate enclosure which includes the USB hub, in addtion to a raspberry pi mico microcontroller using HID with buttons to activate the camera on the raspberry pi, and accepting serial connections to control LED signals from the raspberry pi
+- Bluetooth connectivity to a phone to push preview images
+
 ## Revision B: Portable Build
 
 ### Hardware
