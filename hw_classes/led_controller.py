@@ -3,54 +3,48 @@ from gpiozero import LED
 class LEDController:
     def __init__(self):
         # Initialize the LEDs
-        self.led_status = LED(4)
-        self.led_error = LED(27)
-        self.led_success = LED(22)
-        self.led_flash = LED(17)
-        self.leds = [self.led_status, self.led_error, self.led_success, self.led_flash]
+        self.led_blue = LED(27)
+        self.led_white = LED(17)
+        self.led_green = LED(22)
+        self.leds = [self.led_blue, self.led_white, self.led_green]
 
     def sync_leds(self):
         """Turn off all LEDs."""
         for led in self.leds:
             led.off()
 
-    def turn_on_success(self):
-        """Turn on success LED."""
+    def turn_on_green(self):
+        """Turn on green LED."""
         self.sync_leds()
-        self.led_success.on()
+        self.led_green.on()
 
-    def blink_success(self):
-        self.led_success.blink(on_time=0.1, off_time=0.1, n=5, background=False)
+    def blink_green(self):
+        self.led_green.blink(on_time=0.1, off_time=0.1, n=5, background=False)
 
-    def toggle_success(self):
-        self.led_success.toggle()
+    def toggle_green(self):
+        self.led_green.toggle()
 
-    def turn_on_error(self):
-        """Turn on error LED."""
+    def turn_on_white(self):
+        """Turn on white LED."""
         self.sync_leds()
-        self.led_error.on()
+        self.led_white.on()
 
-    def blink_error(self):
-        self.led_error.blink(on_time=0.1, off_time=0.1, n=5, background=False)
+    def blink_white(self):
+        self.led_white.blink(on_time=0.1, off_time=0.1, n=5, background=False)
 
-    def toggle_error(self):
-        self.led_error.toggle()
+    def toggle_white(self):
+        self.led_white.toggle()
 
-    def turn_on_status(self):
-        """Toggle the status LED."""
+    def turn_on_blue(self):
+        """Toggle the blue LED."""
         self.sync_leds()
-        self.led_status.on()
+        self.led_blue.on()
 
-    def toggle_status(self):
-        self.led_status.toggle()
-
-    def turn_on_flash(self):
-        """Toggle the flash LED."""
-        self.led_flash.on()
+    def toggle_blue(self):
+        self.led_blue.toggle()
 
     def turn_on_all(self):
         """Turn on all except flash"""
-        self.led_success.on()
-        self.led_error.on()
-        self.led_status.on()
-        self.led_flash.off()
+        self.led_green.on()
+        self.led_white.on()
+        self.led_blue.on()

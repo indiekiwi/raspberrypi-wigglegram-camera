@@ -26,3 +26,4 @@ except KeyboardInterrupt:
     print("Program terminated.")
     GPIO.cleanup()
     ser.close()
+
