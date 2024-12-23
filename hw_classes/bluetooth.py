@@ -3,15 +3,16 @@ import subprocess
 
 class Bluetooth:
     def __init__(self):
-        self.is_enable_bluetooth_transfer = False
+        self.is_enable_bluetooth_transfer = True
+
+    def toggle_preview(self):
+        self.is_enable_bluetooth_transfer = not self.is_enable_bluetooth_transfer
+        return self.is_enable_bluetooth_transfer
 
     def send_via_bluetooth(self, image_path):
         config_file = "resources/config.env"
 
         # error handling
-        if not self.is_enable_bluetooth_transfer:
-            print("[Bluetooth] Transfer is disabled")
-            return
         if not os.path.isfile(config_file):
             print(f"[Bluetooth] No resources/config.env")
             return

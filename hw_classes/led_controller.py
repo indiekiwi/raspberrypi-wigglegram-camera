@@ -13,10 +13,12 @@ class LEDController:
         for led in self.leds:
             led.off()
 
-    def turn_on_green(self):
+    def turn_on_green(self, with_blue = False):
         """Turn on green LED."""
         self.sync_leds()
         self.led_green.on()
+        if with_blue:
+            self.led_blue.on()
 
     def blink_green(self):
         self.led_green.blink(on_time=0.1, off_time=0.1, n=5, background=False)
@@ -24,10 +26,12 @@ class LEDController:
     def toggle_green(self):
         self.led_green.toggle()
 
-    def turn_on_white(self):
+    def turn_on_white(self, with_blue = False):
         """Turn on white LED."""
         self.sync_leds()
         self.led_white.on()
+        if with_blue:
+            self.led_blue.on()
 
     def blink_white(self):
         self.led_white.blink(on_time=0.1, off_time=0.1, n=5, background=False)
@@ -35,9 +39,10 @@ class LEDController:
     def toggle_white(self):
         self.led_white.toggle()
 
-    def turn_on_blue(self):
+    def turn_on_blue(self, sync = True):
         """Toggle the blue LED."""
-        self.sync_leds()
+        if sync:
+            self.sync_leds()
         self.led_blue.on()
 
     def toggle_blue(self):
