@@ -12,7 +12,7 @@ from hw_classes.preview import Preview
 # Preferences Config
 hold_seconds = 3
 shutdown_inactivity_seconds = 900 # 15 mins
-is_debug = True
+is_debug = False
 
 # System Config
 devices = ["/dev/video4", "/dev/video2", "/dev/video0"]
